@@ -49,5 +49,5 @@ if ingredients_list and name_order:
 
 
 smoothiefroot_response = requests.get("http://my.smoothiefroot.com/api/fruit/watermelon")  
-st.text(smoothiefroot_response)
+st.text(smoothiefroot_response.json())
     
