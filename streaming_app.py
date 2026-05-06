@@ -35,11 +35,6 @@ if ingredients_list and name_order:
     for fruit_chosen in ingredients_list:
         ingredients_str += fruit_chosen + ' '
 
-        # Correspondance nom au pluriel ou singulier
-        # search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-        value = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-        search_on = value if pd.notna(value) else fruit_chosen
- 
         #all information smoothies
         all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
         res_all_smoothies = all_smoothies_api_details.json()
@@ -47,8 +42,15 @@ if ingredients_list and name_order:
         for fruit in res_all_smoothies:
           name = fruit.get("name", "")
           st.write(name[:4])
-          st.write(my_dataframe["FRUIT_NAME"]
+          st.write(fruit_chosen[:4])
         st.stop()
+        
+        
+        # Correspondance nom au pluriel ou singulier
+        # search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        value = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        search_on = value if pd.notna(value) else fruit_chosen
+
       
         st.subheader(fruit_chosen + ' : Nutrition Information') 
         smoothiefroot_response = requests.get(f"http://my.smoothiefroot.com/api/fruit/{search_on}" )  
