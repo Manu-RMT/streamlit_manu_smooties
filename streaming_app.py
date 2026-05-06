@@ -25,28 +25,28 @@ pd_df = my_dataframe.to_pandas()
 
 
  #all information smoothies
-all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
-res_all_smoothies = all_smoothies_api_details.json()
+# all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
+# res_all_smoothies = all_smoothies_api_details.json()
 
-# 3. Boucle API
-for fruit in res_all_smoothies:
-   api_name = fruit.get("name", "")
-   api_prefix = api_name[:4].lower()
-   for _, row in pd_df.iterrows():
-       fruit_name = row["FRUIT_NAME"]
-       search_on = row["SEARCH_ON"]
-       db_prefix = fruit_name[:4].lower()
+# # 3. Boucle API
+# for fruit in res_all_smoothies:
+#    api_name = fruit.get("name", "")
+#    api_prefix = api_name[:4].lower()
+#    for _, row in pd_df.iterrows():
+#        fruit_name = row["FRUIT_NAME"]
+#        search_on = row["SEARCH_ON"]
+#        db_prefix = fruit_name[:4].lower()
 
-       # 4. condition
-       if api_prefix == db_prefix:
+#        # 4. condition
+#        if api_prefix == db_prefix:
 
-           query = f"""
-           UPDATE smoothies.public.fruit_options
-           SET SEARCH_ON = '{api_name}'
-           WHERE FRUIT_NAME = '{fruit_name}'
-           AND SEARCH_ON IS NULL
-           """
-           session.sql(query).collect()
+#            query = f"""
+#            UPDATE smoothies.public.fruit_options
+#            SET SEARCH_ON = '{api_name}'
+#            WHERE FRUIT_NAME = '{fruit_name}'
+#            AND SEARCH_ON IS NULL
+#            """
+#            session.sql(query).collect()
            
 
 
