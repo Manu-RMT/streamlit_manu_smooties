@@ -23,6 +23,31 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT
 # change to pandas for use iloc
 pd_df = my_dataframe.to_pandas()
 
+
+ #all information smoothies
+all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
+res_all_smoothies = all_smoothies_api_details.json()
+
+# 3. Boucle API
+for fruit in res_all_smoothies:
+   api_name = fruit.get("name", "")
+   api_prefix = api_name[:4].lower()
+   for _, row in pd_df.iterrows():
+       fruit_name = row["FRUIT_NAME"]
+       search_on = row["SEARCH_ON"]
+       db_prefix = fruit_name[:4].lower()
+       # 4. condition
+       if (not search_on or search_on == "") and api_prefix == db_prefix:
+           query = f"""
+           UPDATE smoothies.public.fruit_options
+           SET SEARCH_ON = '{api_prefix}'
+           WHERE FRUIT_NAME ILIKE '{fruit_name}%'
+           AND SEARCH_ON IS NOT NULL
+           """
+           session.sql(query).collect()
+           st.write(f"Updated {fruit_name} → {api_prefix}")
+
+
 ingredients_list = st.multiselect(
     'Choose up to 5 ingedients : '
     ,my_dataframe
@@ -34,16 +59,6 @@ if ingredients_list and name_order:
     ingredients_str = ''
     for fruit_chosen in ingredients_list:
         ingredients_str += fruit_chosen + ' '
-
-        #all information smoothies
-        all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
-        res_all_smoothies = all_smoothies_api_details.json()
-        
-        for fruit in res_all_smoothies:
-          name = fruit.get("name", "")
-          st.write(name[:4])
-          st.write(fruit_chosen[:4])
-        st.stop()
         
         
         # Correspondance nom au pluriel ou singulier
