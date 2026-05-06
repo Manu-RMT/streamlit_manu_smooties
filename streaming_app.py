@@ -40,7 +40,6 @@ for fruit in res_all_smoothies:
        # 4. condition
        if api_prefix == db_prefix:
 
-           st.write(search_on,api_prefix == db_prefix)
            query = f"""
            UPDATE smoothies.public.fruit_options
            SET SEARCH_ON = '{api_name}'
@@ -48,7 +47,7 @@ for fruit in res_all_smoothies:
            AND SEARCH_ON IS NULL
            """
            session.sql(query).collect()
-           st.write(f"Updated {fruit_name} → {api_prefix}")
+           
 
 
 ingredients_list = st.multiselect(
