@@ -43,7 +43,7 @@ if ingredients_list and name_order:
         #all information smoothies
         all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
         res_all_smoothies = all_smoothies_api_details.json()
-        st.write(res_all_smoothies.name)
+        st.write(res_all_smoothies)
         st.stop()
       
         st.subheader(fruit_chosen + ' : Nutrition Information') 
