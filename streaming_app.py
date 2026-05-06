@@ -18,7 +18,11 @@ st.write("Helloooo !!! ", name_order)
 cnx = st.connection('snowflake')
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
-st.write(my_dataframe)
+
+# change to pandas for use iloc
+pd_df = my_dataframe.to_pandas()
+st.write(pd_df)
+st.stop()
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingedients : '
