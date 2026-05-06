@@ -41,7 +41,7 @@ for fruit in res_all_smoothies:
            query = f"""
            UPDATE smoothies.public.fruit_options
            SET SEARCH_ON = '{api_prefix}'
-           WHERE FRUIT_NAME ILIKE '{fruit_name}%'
+           WHERE FRUIT_NAME = '{fruit_name}'
            AND SEARCH_ON IS NOT NULL
            """
            session.sql(query).collect()
