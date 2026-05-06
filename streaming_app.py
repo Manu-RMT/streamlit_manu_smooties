@@ -40,7 +40,11 @@ if ingredients_list and name_order:
         value = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
         search_on = value if pd.notna(value) else fruit_chosen
  
-
+        #all information smoothies
+        all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
+        res_all_smoothies = all_smoothies_api_details.json()
+        st.write(ingredients_str.name)
+        st.stop()
       
         st.subheader(fruit_chosen + ' : Nutrition Information') 
         smoothiefroot_response = requests.get(f"http://my.smoothiefroot.com/api/fruit/{search_on}" )  
