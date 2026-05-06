@@ -35,8 +35,12 @@ if ingredients_list and name_order:
         ingredients_str += fruit_chosen + ' '
 
         # Correspondance nom au pluriel ou singulier
-        search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-             
+        # search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        value = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        search_on = value if pd.notna(value) else fruit_chosen
+ 
+
+      
         st.subheader(fruit_chosen + ' : Nutrition Information') 
         smoothiefroot_response = requests.get(f"http://my.smoothiefroot.com/api/fruit/{search_on}" )  
         res_api = smoothiefroot_response.json()
