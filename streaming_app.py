@@ -38,7 +38,7 @@ for fruit in res_all_smoothies:
        db_prefix = fruit_name[:4].lower()
 
        # 4. condition
-       if (not search_on or search_on == "") and api_prefix == db_prefix:
+       if api_prefix == db_prefix:
 
            st.write(search_on,api_prefix == db_prefix)
            query = f"""
