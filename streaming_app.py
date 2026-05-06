@@ -43,7 +43,7 @@ for fruit in res_all_smoothies:
            st.write(search_on,api_prefix == db_prefix)
            query = f"""
            UPDATE smoothies.public.fruit_options
-           SET SEARCH_ON = '{api_prefix}'
+           SET SEARCH_ON = '{api_name}'
            WHERE FRUIT_NAME = '{fruit_name}'
            AND SEARCH_ON IS NULL
            """
