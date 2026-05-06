@@ -44,8 +44,8 @@ if ingredients_list and name_order:
         all_smoothies_api_details = requests.get(f"http://my.smoothiefroot.com/api/fruit/all" )  
         res_all_smoothies = all_smoothies_api_details.json()
         
-        for key, value_fruits in res_all_smoothies.items():
-          st.write(value_fruits.name)
+        for fruit in res_all_smoothies:
+          st.write(fruit['name'])
         st.stop()
       
         st.subheader(fruit_chosen + ' : Nutrition Information') 
