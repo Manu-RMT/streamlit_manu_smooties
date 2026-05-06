@@ -45,7 +45,9 @@ if ingredients_list and name_order:
         res_all_smoothies = all_smoothies_api_details.json()
         
         for fruit in res_all_smoothies:
-          st.write(fruit['name'])
+          name = fruit.get("name", "")
+          st.write(name[:4])
+          st.write(my_dataframe['FRUIT_NAME"]
         st.stop()
       
         st.subheader(fruit_chosen + ' : Nutrition Information') 
