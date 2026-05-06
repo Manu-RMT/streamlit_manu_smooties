@@ -44,7 +44,7 @@ for fruit in res_all_smoothies:
            UPDATE smoothies.public.fruit_options
            SET SEARCH_ON = '{api_prefix}'
            WHERE FRUIT_NAME = '{fruit_name}'
-           AND SEARCH_ON IS NOT NULL
+           AND SEARCH_ON IS NULL
            """
            session.sql(query).collect()
            st.write(f"Updated {fruit_name} → {api_prefix}")
