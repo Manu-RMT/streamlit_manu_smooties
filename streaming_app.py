@@ -37,9 +37,10 @@ for fruit in res_all_smoothies:
        search_on = row["SEARCH_ON"]
        db_prefix = fruit_name[:4].lower()
 
-       st.write(search_on,api_prefix == db_prefix)
        # 4. condition
        if (not search_on or search_on == "") and api_prefix == db_prefix:
+
+           st.write(search_on,api_prefix == db_prefix)
            query = f"""
            UPDATE smoothies.public.fruit_options
            SET SEARCH_ON = '{api_prefix}'
